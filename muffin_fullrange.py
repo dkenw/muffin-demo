@@ -87,7 +87,8 @@ class Pool:
         amts = np.zeros(self.size)
 
         # calculate amts with lagrange multiplier method, then reject those tiers with negative input amts.
-        # repeat until all input amts are non-negative
+        # repeat until all input amts are non-negative.
+        # (see https://twitter.com/Deliswap/status/1445724300296683521 for the fomula used)
         while True:
             amts[mask] = (lsg[mask] * (amount + np.sum(res[mask])) / np.sum(lsg[mask])) - res[mask]
             if np.all(amts[mask] >= 0):
